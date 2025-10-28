@@ -124,7 +124,7 @@ async def search_notes(
 
 @mcp.tool()
 async def decrease_brightness(
-    amount: float = Field(default=0.0625, ge=0.0, le=1.0)
+    amount: float = Field(default=0.0625, ge=0.0, le=1.0),
 ) -> str:
     """
     Decrease screen brightness
@@ -140,7 +140,7 @@ async def decrease_brightness(
 
 @mcp.tool()
 async def increase_brightness(
-    amount: float = Field(default=0.0625, ge=0.0, le=1.0)
+    amount: float = Field(default=0.0625, ge=0.0, le=1.0),
 ) -> str:
     """
     Increase screen brightness
@@ -155,9 +155,7 @@ async def increase_brightness(
 
 
 @mcp.tool()
-async def turn_up_volume(
-    amount: float = Field(default=6.25, ge=0.0, le=100.0)
-) -> str:
+async def turn_up_volume(amount: float = Field(default=6.25, ge=0.0, le=100.0)) -> str:
     """
     Turn up system volume
 
@@ -172,7 +170,7 @@ async def turn_up_volume(
 
 @mcp.tool()
 async def turn_down_volume(
-    amount: float = Field(default=6.25, ge=0.0, le=100.0)
+    amount: float = Field(default=6.25, ge=0.0, le=100.0),
 ) -> str:
     """
     Turn down system volume

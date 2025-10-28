@@ -1,6 +1,6 @@
 from decimal import DefaultContext
 from fastmcp import FastMCP
-from tools import messages, contacts, app, reminders, notes
+from tools import messages, contacts, app, reminders, notes, system
 from pydantic import Field
 
 mcp = FastMCP("Altic-MCP")
@@ -120,6 +120,70 @@ async def search_notes(
         A list of notes based on search
     """
     return notes.search_notes(query, max_results)
+
+
+@mcp.tool()
+async def decrease_brightness(
+    amount: float = Field(default=0.0625, ge=0.0, le=1.0)
+) -> str:
+    """
+    Decrease screen brightness
+
+    Args:
+        amount: Amount to decrease brightness by (0.0 to 1.0 scale). Default is 0.0625 (6.25%)
+
+    Returns:
+        Success or error message
+    """
+    return system.decrease_brightness(amount)
+
+
+@mcp.tool()
+async def increase_brightness(
+    amount: float = Field(default=0.0625, ge=0.0, le=1.0)
+) -> str:
+    """
+    Increase screen brightness
+
+    Args:
+        amount: Amount to increase brightness by (0.0 to 1.0 scale). Default is 0.0625 (6.25%)
+
+    Returns:
+        Success or error message
+    """
+    return system.increase_brightness(amount)
+
+
+@mcp.tool()
+async def turn_up_volume(
+    amount: float = Field(default=6.25, ge=0.0, le=100.0)
+) -> str:
+    """
+    Turn up system volume
+
+    Args:
+        amount: Amount to increase volume by (0-100 scale). Default is 6.25 (6.25%)
+
+    Returns:
+        Success or error message
+    """
+    return system.turn_up_volume(amount)
+
+
+@mcp.tool()
+async def turn_down_volume(
+    amount: float = Field(default=6.25, ge=0.0, le=100.0)
+) -> str:
+    """
+    Turn down system volume
+
+    Args:
+        amount: Amount to decrease volume by (0-100 scale). Default is 6.25 (6.25%)
+
+    Returns:
+        Success or error message
+    """
+    return system.turn_down_volume(amount)
 
 
 if __name__ == "__main__":

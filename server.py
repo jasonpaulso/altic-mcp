@@ -1,6 +1,6 @@
 from decimal import DefaultContext
 from fastmcp import FastMCP
-from tools import messages, contacts, app, reminders, notes, system
+from tools import messages, contacts, app, reminders, notes, system, calendar
 from pydantic import Field
 
 mcp = FastMCP("Altic-MCP")
@@ -182,6 +182,44 @@ async def turn_down_volume(
         Success or error message
     """
     return system.turn_down_volume(amount)
+
+
+@mcp.tool()
+async def create_calendar_event(
+    title: str,
+    start_datetime: str,
+    duration_minutes: int,
+    calendar_name: str = Field(default=""),
+) -> str:
+    """
+    Create a calendar event in the macOS Calendar app
+
+    Args:
+        title: The event title
+        start_datetime: Start date and time in format 'YYYY-MM-DD HH:MM' (e.g., '2025-10-30 14:30')
+        duration_minutes: Duration of the event in minutes
+        calendar_name: Optional calendar name (uses default calendar if not specified)
+
+    Returns:
+        Success or error message
+    """
+    return calendar.create_calendar_event(
+        title, start_datetime, duration_minutes, calendar_name
+    )
+
+
+@mcp.tool()
+async def list_calendar_events_for_day(date: str) -> str:
+    """
+    List all calendar events for a specific day
+
+    Args:
+        date: Date in format 'YYYY-MM-DD' (e.g., '2025-10-30')
+
+    Returns:
+        List of events for the specified day or error message
+    """
+    return calendar.list_calendar_events_for_day(date)
 
 
 if __name__ == "__main__":

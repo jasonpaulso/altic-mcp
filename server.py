@@ -10,6 +10,7 @@ from tools import (
     calendar,
     safari,
     display,
+    image_generation,
 )
 from pydantic import Field
 
@@ -409,6 +410,37 @@ async def remove_screen_glow() -> str:
         Success or error message
     """
     return display.remove_screen_glow()
+
+
+@mcp.tool()
+async def generate_image(prompt: str) -> str:
+    """
+    Generate a new image from a text prompt using an image generation model.
+    The generated image will be saved to the Downloads folder and automatically opened.
+
+    Args:
+        prompt: Text description of the image to generate (e.g., "A nano banana in a fancy restaurant")
+
+    Returns:
+        Success message with the path to the generated image or error message
+    """
+    return image_generation.generate_image(prompt)
+
+
+@mcp.tool()
+async def update_image(prompt: str, image_path: str) -> str:
+    """
+    Update or edit an existing image based on a text prompt using an image model.
+    The updated image will be saved to the Downloads folder and automatically opened.
+
+    Args:
+        prompt: Text description of how to modify the image (e.g., "Add a Gemini constellation in the background")
+        image_path: Full path to the existing image file to be updated
+
+    Returns:
+        Success message with the path to the updated image or error message
+    """
+    return image_generation.update_image(prompt, image_path)
 
 
 if __name__ == "__main__":

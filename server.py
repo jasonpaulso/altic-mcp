@@ -1,6 +1,16 @@
 from decimal import DefaultContext
 from fastmcp import FastMCP
-from tools import messages, contacts, app, reminders, notes, system, calendar
+from tools import (
+    messages,
+    contacts,
+    app,
+    reminders,
+    notes,
+    system,
+    calendar,
+    safari,
+    display,
+)
 from pydantic import Field
 
 mcp = FastMCP("Altic-MCP")
@@ -220,6 +230,185 @@ async def list_calendar_events_for_day(date: str) -> str:
         List of events for the specified day or error message
     """
     return calendar.list_calendar_events_for_day(date)
+
+
+@mcp.tool()
+async def open_safari_tab(url: str = Field(default="")) -> str:
+    """
+    Open a new tab in Safari with optional URL
+
+    Args:
+        url: Optional URL to open in the new tab
+
+    Returns:
+        Success or error message
+    """
+    return safari.open_safari_tab(url)
+
+
+@mcp.tool()
+async def close_safari_tab(tab_index: int = Field(default=-1)) -> str:
+    """
+    Close a Safari tab. Use -1 for current tab or specify tab index (1-based)
+
+    Args:
+        tab_index: Tab index to close (-1 for current tab, or 1-based index)
+
+    Returns:
+        Success or error message
+    """
+    return safari.close_safari_tab(tab_index)
+
+
+@mcp.tool()
+async def get_safari_tabs() -> str:
+    """
+    Get a list of all open Safari tabs with their URLs and titles
+
+    Returns:
+        List of tabs with URLs and titles or error message
+    """
+    return safari.get_safari_tabs()
+
+
+@mcp.tool()
+async def switch_safari_tab(tab_index: int) -> str:
+    """
+    Switch to a specific Safari tab by index (1-based)
+
+    Args:
+        tab_index: Tab index to switch to (must be greater than 0)
+
+    Returns:
+        Success or error message
+    """
+    return safari.switch_safari_tab(tab_index)
+
+
+@mcp.tool()
+async def run_safari_javascript(javascript_code: str) -> str:
+    """
+    Execute JavaScript code in the current Safari tab and return the result
+
+    Args:
+        javascript_code: JavaScript code to execute
+
+    Returns:
+        JavaScript execution result or error message
+    """
+    return safari.run_safari_javascript(javascript_code)
+
+
+@mcp.tool()
+async def navigate_safari(url: str) -> str:
+    """
+    Navigate to a URL in the current Safari tab
+
+    Args:
+        url: URL to navigate to
+
+    Returns:
+        Success or error message
+    """
+    return safari.navigate_safari(url)
+
+
+@mcp.tool()
+async def reload_safari_page() -> str:
+    """
+    Reload the current Safari page
+
+    Returns:
+        Success or error message
+    """
+    return safari.reload_safari_page()
+
+
+@mcp.tool()
+async def safari_go_back() -> str:
+    """
+    Navigate back in Safari history
+
+    Returns:
+        Success or error message
+    """
+    return safari.safari_go_back()
+
+
+@mcp.tool()
+async def safari_go_forward() -> str:
+    """
+    Navigate forward in Safari history
+
+    Returns:
+        Success or error message
+    """
+    return safari.safari_go_forward()
+
+
+@mcp.tool()
+async def open_safari_window(url: str = Field(default="")) -> str:
+    """
+    Open a new Safari window with optional URL
+
+    Args:
+        url: Optional URL to open in the new window
+
+    Returns:
+        Success or error message
+    """
+    return safari.open_safari_window(url)
+
+
+@mcp.tool()
+async def close_safari_window() -> str:
+    """
+    Close the current Safari window
+
+    Returns:
+        Success or error message
+    """
+    return safari.close_safari_window()
+
+
+@mcp.tool()
+async def get_safari_page_info() -> str:
+    """
+    Get information about the current Safari page including URL, title, text content, and HTML source
+
+    Returns:
+        Page information including URL, title, text, and source or error message
+    """
+    return safari.get_safari_page_info()
+
+
+@mcp.tool()
+async def add_screen_glow() -> str:
+    """
+    Add a visual feedback indicator (orange glow around screen edges) to show that automated actions are in progress.
+
+    IMPORTANT: Call this FIRST before performing any automated actions to provide visual feedback
+    to the user that the tool is actively working. This serves as a clear indicator that
+    operations are being executed.
+
+    Returns:
+        Success or error message
+    """
+    return display.add_screen_glow()
+
+
+@mcp.tool()
+async def remove_screen_glow() -> str:
+    """
+    Remove the visual feedback indicator (screen glow) when automated actions are complete.
+
+    IMPORTANT: Call this when all automated actions are complete to stop the visual feedback
+    indicator and signal to the user that operations have finished.
+
+    Returns:
+        Success or error message
+    """
+    return display.remove_screen_glow()
 
 
 if __name__ == "__main__":

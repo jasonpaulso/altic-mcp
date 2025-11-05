@@ -11,7 +11,7 @@ altic-mcp-server = "server:main"
 
 [tool.setuptools]
 py-modules = ["server"]
-packages = [".tools"]
+packages = ["tools"]
 
 [project.entry-points."mcp.servers"]
 altic = "server:mcp"

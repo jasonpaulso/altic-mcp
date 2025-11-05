@@ -19,12 +19,29 @@ An MCP server that gives Claude hands-on control of your Mac, what Siri should'v
 
 ## Quick Start
 
+### Option 1: Install as UV Tool (Recommended)
+
+```bash
+# Install UV if needed
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install altic-mcp as a tool
+git clone https://github.com/altic-dev/altic-mcp.git
+cd altic-mcp
+uv tool install .
+
+# Test it works
+altic-mcp-server
+```
+
+### Option 2: Local Development Setup
+
 ```bash
 # Install UV if needed
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Clone and setup
-git clone https://github.com/altic-dev/altic-mcp.git 
+git clone https://github.com/altic-dev/altic-mcp.git
 cd altic-mcp
 uv sync
 
@@ -33,6 +50,22 @@ uv run server.py
 ```
 
 ## Setup with Claude Desktop
+
+### Using UV Tool Install (Recommended)
+
+After installing as a UV tool, edit `~/.config/claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "altic-mcp": {
+      "command": "altic-mcp-server"
+    }
+  }
+}
+```
+
+### Using Local Path
 
 **1. Edit `~/.config/claude/claude_desktop_config.json`:**
 

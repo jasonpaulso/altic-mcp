@@ -410,6 +410,8 @@ async def remove_screen_glow() -> str:
     """
     return display.remove_screen_glow()
 
+def main():
+    mcp.run()
 
 if __name__ == "__main__":
-    mcp.run()
+    main()

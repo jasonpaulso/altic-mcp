@@ -53,7 +53,7 @@ uv run server.py
 
 ### Using UV Tool Install (Recommended)
 
-After installing as a UV tool, edit `~/.config/claude/claude_desktop_config.json`:
+After installing as a UV tool, edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```json
 {
@@ -67,7 +67,7 @@ After installing as a UV tool, edit `~/.config/claude/claude_desktop_config.json
 
 ### Using Local Path
 
-**1. Edit `~/.config/claude/claude_desktop_config.json`:**
+**1. Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:**
 
 ```json
 {

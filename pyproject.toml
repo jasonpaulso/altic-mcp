@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "fastmcp>=2.13.0.1",
-    "rapidfuzz>=3.14.1",
-]
+dependencies = ["fastmcp>=2.13.0.1", "rapidfuzz>=3.14.1"]
+[project.entry-points."mcp.servers"]
+altic = "server:mcp"

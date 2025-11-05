@@ -9,5 +9,9 @@ dependencies = ["fastmcp>=2.13.0.1", "rapidfuzz>=3.14.1"]
 [project.scripts]
 altic-mcp-server = "server:main"
 
+[tool.setuptools]
+py-modules = ["server"]
+packages = [".tools"]
+
 [project.entry-points."mcp.servers"]
 altic = "server:mcp"
